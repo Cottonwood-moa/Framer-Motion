@@ -1,12 +1,13 @@
-# CRA + typescript + react-router + styled-components(theme)
+# Framer Motion Example
 
 ## 🌿 Branches
 
-필요한 템플릿을 브랜치로 찾아가세요.
+다양한 Framer Motion 예제입니다.
 
-- [Basic create react app](https://github.com/Cottonwood-moa/ReactBasicTemplate)
-- [CRA + React-router-dom + Typescript + Styled-components(css reset)](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript)
-- [CRA + React-router-dom + Typescript + Styled-components(css reset) + react-query + recoil](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript-recoil-reactQuery)
+- [Gestures](https://github.com/Cottonwood-moa/Framer-Motion)
+- [Motion Value](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript)
+- [SVG](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript-recoil-reactQuery)
+- [Animate Presense](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript-recoil-reactQuery)
 
 ## package.json
 
@@ -26,6 +27,7 @@
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.24",
+    "framer-motion": "^6.2.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",

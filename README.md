@@ -5,9 +5,9 @@
 다양한 Framer Motion 예제입니다.
 
 - [Gestures](https://github.com/Cottonwood-moa/Framer-Motion)
-- [Motion Value](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript)
-- [SVG](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript-recoil-reactQuery)
-- [Animate Presense](https://github.com/Cottonwood-moa/ReactBasicTemplate/tree/react-typescript-recoil-reactQuery)
+- [Motion Value](https://github.com/Cottonwood-moa/Framer-Motion/tree/motionValue)
+- [SVG](https://github.com/Cottonwood-moa/Framer-Motion/tree/svg)
+- [Animate Presense](https://github.com/Cottonwood-moa/Framer-Motion/tree/animatePresence)
 
 ## package.json
 

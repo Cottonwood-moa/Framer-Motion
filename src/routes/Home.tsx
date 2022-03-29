@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import useWindowDimensions from "../getWindowDimension";
 const Container = styled(motion.div)`
-  width: 1400px;
   left: 0;
   right: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 2rem;
 `;
@@ -52,17 +50,16 @@ function Home() {
   return (
     <>
       <H1>Framer motion</H1>
-      <Container variants={containerVars} initial="start" animate="end">
+      <Container
+        layout
+        variants={containerVars}
+        style={{
+          gridTemplateColumns: width < 1200 ? `repeat(3,1fr)` : `repeat(4,1fr)`,
+        }}
+      >
         {cardList.map((card, index) => {
           return (
-            <Card
-              layout
-              key={index}
-              style={{
-                gridTemplateColumns:
-                  width < 1200 ? `repeat(3, 1fr)` : `repeat(4, 1fr)`,
-              }}
-            >
+            <Card layout key={index}>
               {card} {index}
             </Card>
           );

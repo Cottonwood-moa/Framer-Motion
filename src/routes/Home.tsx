@@ -9,20 +9,18 @@ const Container = styled(motion.div)`
 const Card = styled(motion.div)``;
 
 const containerVars = {
-  start: {},
-  end: {},
-  exit: {},
+  start: {
+    backgroundColor: `rgba(0,0,0,0)`,
+  },
+  end: {
+    backgroundColor: `rgba(0,0,0,1)`,
+  },
 };
 
 function Home() {
   return (
-    <AnimatePresence>
-      <Container
-        variants={containerVars}
-        initial="start"
-        animate="end"
-        exit="exit"
-      >
+    <AnimatePresence exitBeforeEnter>
+      <Container variants={containerVars} initial="start" animate="end">
         <Link to={`/test`}>Go to Test</Link>
       </Container>
       ;

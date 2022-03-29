@@ -9,6 +9,9 @@
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/79053495/160540998-ba7acc0d-508a-44fb-aad0-9129097418f1.gif)  
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/79053495/160540999-6ad867aa-97d0-4c73-8b37-cad5864f07a8.gif)  
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/79053495/160541001-04b38a9e-b4f2-4d77-a14a-f3669e3417be.gif)  
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/79053495/160600831-e160049e-cb08-4a72-a668-c7173904b21f.gif)  
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/79053495/160600836-8d1496d4-c0b8-4469-bdd8-afa829d634b3.gif)  
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/79053495/160600840-43234323-28bf-43e3-aa19-e411424f8327.gif)  
   
 
 - [Gestures](https://github.com/Cottonwood-moa/Framer-Motion)

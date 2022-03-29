@@ -11,7 +11,8 @@ const Wrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  button {
+  div {
+    display: flex;
     transform: translateY(200px);
   }
 `;
@@ -72,8 +73,10 @@ function App() {
           {visible}
         </Box>
       </AnimatePresence>
-      <button onClick={nextButton}>next</button>
-      <button onClick={prevButton}>prev</button>
+      <div>
+        <button onClick={prevButton}>prev</button>
+        <button onClick={nextButton}>next</button>
+      </div>
     </Wrapper>
   );
 }

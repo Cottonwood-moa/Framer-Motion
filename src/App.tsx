@@ -33,7 +33,9 @@ const svgVariants = {
     fill: "rgba(255,255,255,1)",
     transition: {
       // 모든 transition
-      default: { duration: 5 },
+      default: {
+        duration: 5,
+      },
       // 특정 요소 transition
       fill: { duration: 2, delay: 2 },
     },

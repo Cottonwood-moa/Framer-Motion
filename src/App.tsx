@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -22,11 +23,37 @@ const Box = styled(motion.div)`
   align-items: center;
   font-weight: bold;
 `;
-
+const boxVariants = {
+  start: {
+    scale: 0,
+    opacity: 0,
+    rotate: 0,
+  },
+  end: {
+    scale: 1,
+    opacity: 1,
+    rotate: 360,
+  },
+  hide: {
+    scale: 0,
+    opacity: 0,
+  },
+};
 function App() {
+  const [isToggled, setIsToggled] = useState(false);
   return (
     <Wrapper>
-      <Box />
+      <button onClick={() => setIsToggled((prev) => !prev)}>버튼</button>
+      <AnimatePresence>
+        {isToggled ? (
+          <Box
+            variants={boxVariants}
+            initial={`start`}
+            animate={`end`}
+            exit={`hide`}
+          />
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 }

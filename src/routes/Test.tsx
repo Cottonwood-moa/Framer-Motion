@@ -7,16 +7,12 @@ const Container = styled(motion.div)`
   background-color: red;
 `;
 const containerVars = {
-  start: {
-    backgroundColor: `rgba(138, 43, 226,0)`,
-  },
-  end: {
-    backgroundColor: `rgba(138, 43, 226,1)`,
-  },
+  start: {},
+  end: {},
 };
 function Test() {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence>
       <Container variants={containerVars} initial="start" animate="end">
         <Link to={`/`}>Go to Home</Link>
       </Container>

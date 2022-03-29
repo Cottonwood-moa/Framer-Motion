@@ -18,6 +18,9 @@
 - [Motion Value](https://github.com/Cottonwood-moa/Framer-Motion/tree/motionValue)
 - [SVG](https://github.com/Cottonwood-moa/Framer-Motion/tree/svg)
 - [Animate Presense](https://github.com/Cottonwood-moa/Framer-Motion/tree/animatePresence)
+- [Slider](https://github.com/Cottonwood-moa/Framer-Motion/tree/slider)  
+- [Layout](https://github.com/Cottonwood-moa/Framer-Motion/tree/layout)  
+- [Layout](https://github.com/Cottonwood-moa/Framer-Motion/tree/selectBox)  
 
 ## package.json
 

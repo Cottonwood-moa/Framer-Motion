@@ -2,12 +2,15 @@ import { motion, useViewportScroll } from "framer-motion";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useWindowDimensions from "../getWindowDimension";
 const Container = styled(motion.div)`
   left: 0;
   right: 0;
   margin: 0 auto;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2rem;
 `;
 
 const Card = styled(motion.div)`
@@ -43,7 +46,6 @@ const cardList: Array<string> = [
 ];
 function Home() {
   const { width } = useWindowDimensions();
-  console.log(width);
   return (
     <>
       <H1>Framer motion</H1>
@@ -56,7 +58,7 @@ function Home() {
       >
         {cardList.map((card, index) => {
           return (
-            <Card layout key={card}>
+            <Card layout key={index}>
               {card} {index}
             </Card>
           );

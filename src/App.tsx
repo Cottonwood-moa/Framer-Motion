@@ -8,15 +8,16 @@ const Wrapper = styled(motion.div)`
   background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
   color: #333;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   button {
-    position: absolute;
+    transform: translateY(200px);
   }
 `;
 
 const Box = styled(motion.div)`
+  position: absolute;
   width: 200px;
   height: 200px;
   border-radius: 15px;
@@ -26,39 +27,53 @@ const Box = styled(motion.div)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font-size: 28px;
 `;
 const boxVariants = {
-  start: {
-    scale: 0,
+  start: (back: boolean) => ({
+    x: back ? -500 : 500,
     opacity: 0,
     rotate: 0,
-  },
+  }),
   end: {
-    scale: 1,
+    x: 0,
     opacity: 1,
     rotate: 360,
   },
-  hide: {
-    scale: 0,
+  hide: (back: boolean) => ({
+    x: back ? 500 : -500,
     opacity: 0,
-  },
+    rotate: 0,
+  }),
 };
 function App() {
-  const [isToggled, setIsToggled] = useState(false);
+  const [visible, setVisible] = useState(2);
+  const [back, setBack] = useState(false);
+  const nextButton = () => {
+    setBack(false);
+    setVisible((prev) => (prev === 10 ? (prev = 1) : prev + 1));
+  };
+  const prevButton = () => {
+    setBack(true);
+    setVisible((prev) => (prev === 1 ? (prev = 10) : prev - 1));
+  };
   return (
     <Wrapper>
-      <AnimatePresence>
-        {isToggled ? (
-          <Box
-            drag
-            variants={boxVariants}
-            initial={`start`}
-            animate={`end`}
-            exit={`hide`}
-          />
-        ) : null}
+      {/* exitBeforeEnter => exit,enter 애니메이션이 동시에 실행되지 않도록 */}
+      <AnimatePresence custom={back}>
+        <Box
+          key={visible}
+          custom={back}
+          variants={boxVariants}
+          initial={`start`}
+          animate={`end`}
+          exit={`hide`}
+        >
+          {visible}
+        </Box>
       </AnimatePresence>
-      <button onClick={() => setIsToggled((prev) => !prev)}>버튼</button>
+      <button onClick={nextButton}>next</button>
+      <button onClick={prevButton}>prev</button>
     </Wrapper>
   );
 }

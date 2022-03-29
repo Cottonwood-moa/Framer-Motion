@@ -8,8 +8,12 @@ const Wrapper = styled(motion.div)`
   background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
   color: #333;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  button {
+    position: absolute;
+  }
 `;
 
 const Box = styled(motion.div)`
@@ -43,10 +47,10 @@ function App() {
   const [isToggled, setIsToggled] = useState(false);
   return (
     <Wrapper>
-      <button onClick={() => setIsToggled((prev) => !prev)}>버튼</button>
       <AnimatePresence>
         {isToggled ? (
           <Box
+            drag
             variants={boxVariants}
             initial={`start`}
             animate={`end`}
@@ -54,6 +58,7 @@ function App() {
           />
         ) : null}
       </AnimatePresence>
+      <button onClick={() => setIsToggled((prev) => !prev)}>버튼</button>
     </Wrapper>
   );
 }

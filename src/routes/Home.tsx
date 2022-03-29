@@ -9,7 +9,6 @@ const Container = styled(motion.div)`
   right: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
   gap: 2rem;
 `;
 
@@ -46,11 +45,12 @@ const cardList: Array<string> = [
 ];
 function Home() {
   const { width } = useWindowDimensions();
+  const [test, setTest] = useState(false);
+  console.log(width > 1200);
   return (
     <>
-      <H1>Framer motion</H1>
+      <H1 onClick={() => setTest((prev) => !prev)}>Framer motion</H1>
       <Container
-        layout
         variants={containerVars}
         style={{
           gridTemplateColumns: width < 1200 ? `repeat(3,1fr)` : `repeat(4,1fr)`,

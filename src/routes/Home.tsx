@@ -8,9 +8,6 @@ const Container = styled(motion.div)`
   left: 0;
   right: 0;
   margin: 0 auto;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 2rem;
 `;
 
 const Card = styled(motion.div)`
@@ -59,7 +56,7 @@ function Home() {
       >
         {cardList.map((card, index) => {
           return (
-            <Card layout key={index}>
+            <Card layout key={card}>
               {card} {index}
             </Card>
           );

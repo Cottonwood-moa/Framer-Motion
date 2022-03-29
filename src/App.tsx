@@ -43,9 +43,30 @@ const Overlay = styled(motion.div)`
   justify-content: center;
   align-items: center;
 `;
-
+interface IBoxContent {
+  id: number;
+  name: string;
+}
 function App() {
   const [id, setId] = useState<null | string>(null);
+  const boxContent: Array<IBoxContent> = [
+    {
+      id: 1,
+      name: "박건우",
+    },
+    {
+      id: 2,
+      name: "정재욱",
+    },
+    {
+      id: 3,
+      name: "이채영",
+    },
+    {
+      id: 4,
+      name: "백승현",
+    },
+  ];
   return (
     <Wrapper>
       <Grid>
@@ -66,7 +87,8 @@ function App() {
             exit={{ backgroundColor: `rgba(0, 0, 0, 0)` }}
           >
             <Box layoutId={id} style={{ width: 400, height: 200 }}>
-              {id}
+              {boxContent[parseInt(id) - 1].name}
+              {boxContent[parseInt(id) - 1].id}
             </Box>
           </Overlay>
         ) : null}

@@ -18,62 +18,37 @@ const Wrapper = styled(motion.div)`
 
 const Box = styled(motion.div)`
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   border-radius: 15px;
   background-color: white;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: bold;
   font-size: 28px;
 `;
-const boxVariants = {
-  start: (back: boolean) => ({
-    x: back ? -500 : 500,
-    opacity: 0,
-    rotate: 0,
-  }),
-  end: {
-    x: 0,
-    opacity: 1,
-    rotate: 360,
-  },
-  hide: (back: boolean) => ({
-    x: back ? 500 : -500,
-    opacity: 0,
-    rotate: 0,
-  }),
-};
+const Circle = styled(motion.div)`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.accentColor};
+`;
 function App() {
-  const [visible, setVisible] = useState(2);
-  const [back, setBack] = useState(false);
-  const nextButton = () => {
-    setBack(false);
-    setVisible((prev) => (prev === 10 ? (prev = 1) : prev + 1));
-  };
-  const prevButton = () => {
-    setBack(true);
-    setVisible((prev) => (prev === 1 ? (prev = 10) : prev - 1));
+  const [isClicked, setIsClicked] = useState(false);
+  const onClick = () => {
+    setIsClicked((prev) => !prev);
   };
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       {/* exitBeforeEnter => exit,enter 애니메이션이 동시에 실행되지 않도록 */}
-      <AnimatePresence custom={back}>
-        <Box
-          key={visible}
-          custom={back}
-          variants={boxVariants}
-          initial={`start`}
-          animate={`end`}
-          exit={`hide`}
-        >
-          {visible}
-        </Box>
-      </AnimatePresence>
-      <button onClick={nextButton}>next</button>
-      <button onClick={prevButton}>prev</button>
+      <Box
+        style={{
+          justifyContent: isClicked ? "center" : "flex-start",
+          alignItems: isClicked ? "center" : "flex-start",
+        }}
+      >
+        <Circle layout />
+      </Box>
     </Wrapper>
   );
 }

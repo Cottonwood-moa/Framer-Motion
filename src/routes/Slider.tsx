@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Code from "../components/Code";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -11,12 +12,11 @@ const Wrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  div {
-    display: flex;
-    transform: translateY(100px);
-  }
 `;
-
+const ButtonWrap = styled.div`
+  display: flex;
+  transform: translateY(200px);
+`;
 const Box = styled(motion.div)`
   position: absolute;
   width: 200px;
@@ -37,11 +37,24 @@ const Button = styled.div`
   border-radius: 10px;
   color: white;
   font-weight: bold;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 2rem;
+  cursor: pointer;
+`;
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
 const boxVariants = {
   start: (back: boolean) => ({
@@ -63,6 +76,7 @@ const boxVariants = {
 function Slider() {
   const [visible, setVisible] = useState(2);
   const [back, setBack] = useState(false);
+  const [code, setCode] = useState(false);
   const nextButton = () => {
     setBack(false);
     setVisible((prev) => (prev === 10 ? (prev = 1) : prev + 1));
@@ -72,25 +86,49 @@ function Slider() {
     setVisible((prev) => (prev === 1 ? (prev = 10) : prev - 1));
   };
   return (
-    <Wrapper>
-      {/* exitBeforeEnter => exit,enter 애니메이션이 동시에 실행되지 않도록 */}
-      <AnimatePresence custom={back}>
-        <Box
-          key={visible}
-          custom={back}
-          variants={boxVariants}
-          initial={`start`}
-          animate={`end`}
-          exit={`hide`}
-        >
-          {visible}
-        </Box>
-      </AnimatePresence>
-      <div>
-        <Button onClick={prevButton}>prev</Button>
-        <Button onClick={nextButton}>next</Button>
-      </div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <AnimatePresence>
+          {code ? <Code setCode={setCode} branch={`slider`} /> : null}
+        </AnimatePresence>
+        {/* exitBeforeEnter => exit,enter 애니메이션이 동시에 실행되지 않도록 */}
+        <AnimatePresence custom={back}>
+          <Box
+            key={visible}
+            custom={back}
+            variants={boxVariants}
+            initial={`start`}
+            animate={`end`}
+            exit={`hide`}
+          >
+            {visible}
+          </Box>
+        </AnimatePresence>
+        <ButtonWrap>
+          <Button onClick={prevButton}>prev</Button>
+          <Button onClick={nextButton}>next</Button>
+        </ButtonWrap>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
+      </Wrapper>
+    </>
   );
 }
 

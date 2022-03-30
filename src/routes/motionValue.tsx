@@ -8,6 +8,8 @@ import {
 } from "framer-motion";
 import { useEffect, useState } from "react";
 import Code from "../components/Code";
+import { useNavigate } from "react-router-dom";
+import { BackArrow } from "./Svg";
 
 const Wrapper = styled(motion.div)`
   height: 150vh;
@@ -65,6 +67,7 @@ function MotionValue() {
   );
   const { scrollYProgress } = useViewportScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 3]);
+  const navigate = useNavigate();
   // 추적 방법
   useEffect(() => {
     x.onChange(() => {
@@ -73,6 +76,14 @@ function MotionValue() {
   }, [x]);
   return (
     <Wrapper style={{ background: gradient }}>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`motionValue`} /> : null}
       </AnimatePresence>

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Code from "../components/Code";
+import { useNavigate } from "react-router-dom";
+import { BackArrow } from "./Svg";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -66,8 +68,17 @@ interface IBoxContent {
 function SelectBox() {
   const [id, setId] = useState<null | string>(null);
   const [code, setCode] = useState(false);
+  const navigate = useNavigate();
   return (
     <Wrapper>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`selectBox`} /> : null}
       </AnimatePresence>

@@ -2,7 +2,20 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import Code from "../components/Code";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+export const BackArrow = styled(motion.div)`
+  position: fixed;
+  width: 4rem;
+  height: 4rem;
+  color: white;
+  top: 2rem;
+  left: 2rem;
+  margin: auto;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+`;
 const Wrapper = styled(motion.div)`
   height: 100vh;
   width: 100vw;
@@ -50,8 +63,17 @@ const svgVariants = {
 };
 function Test() {
   const [code, setCode] = useState(false);
+  const navigate = useNavigate();
   return (
     <Wrapper>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`svg`} /> : null}
       </AnimatePresence>

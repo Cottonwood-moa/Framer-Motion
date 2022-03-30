@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import Code from "../components/Code";
+import { BackArrow } from "./Svg";
+import { useNavigate } from "react-router-dom";
 
 //  styled components
 const Wrapper = styled.div`
@@ -62,11 +64,20 @@ const boxVariants = {
 function Gesture() {
   const biggerBoxRef = useRef<HTMLDivElement>(null);
   const [code, setCode] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`gesture`} /> : null}
       </AnimatePresence>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <Wrapper>
         <BiggerBox ref={biggerBoxRef}>
           <Box

@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useWindowDimensions from "../getWindowDimension";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkGfm from "remark-gfm";
+import { useEffect, useState } from "react";
+import ReadMd from "../service/readMd";
 const Container = styled(motion.div)`
   width: 1400px;
   height: 100vh;
@@ -79,12 +85,12 @@ const cardList: Array<ICard> = [
     backgroundColor: "#44bd32",
   },
   {
-    content: "layout",
-    backgroundColor: "#e84118",
-  },
-  {
     content: "animatePresence",
     backgroundColor: "#273c75",
+  },
+  {
+    content: "layout",
+    backgroundColor: "#e84118",
   },
   {
     content: "svg",
@@ -99,8 +105,18 @@ const cardList: Array<ICard> = [
     backgroundColor: "#55efc4",
   },
 ];
+const readMd = new ReadMd();
 function Home() {
   const { width } = useWindowDimensions();
+  const navigate = useNavigate();
+  const [mdFile, setMdFile] = useState(``);
+  const read = async () => {
+    const res = await readMd.readGithubMd(`master`);
+    setMdFile(res as string);
+  };
+  useEffect(() => {
+    read();
+  }, [mdFile]);
   return (
     <>
       <H1>Framer motion</H1>
@@ -112,19 +128,41 @@ function Home() {
       <Container layout variants={containerVars}>
         {cardList.map((card, index) => {
           return (
-            <Link to={`/${card.content}`} key={card.content}>
-              <Card
-                layout
-                variants={cardVars}
-                background={card.backgroundColor}
-                animate={{ rotate: 10 }}
-                whileHover={`whileHover`}
-              >
-                {card.content.toUpperCase()}
-              </Card>
-            </Link>
+            <Card
+              layout
+              variants={cardVars}
+              background={card.backgroundColor}
+              animate={{ rotate: 10 }}
+              whileHover={`whileHover`}
+              onClick={() => navigate(`/${card.content}`)}
+              key={card.content}
+            >
+              {card.content.toUpperCase()}
+            </Card>
           );
         })}
+        <ReactMarkdown
+          children={mdFile}
+          remarkPlugins={[remarkGfm]}
+          components={{
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || "");
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  children={String(children).replace(/\n$/, "")}
+                  style={a11yDark}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                />
+              ) : (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        />
       </Container>
     </>
   );

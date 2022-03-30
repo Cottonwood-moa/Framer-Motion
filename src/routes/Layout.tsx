@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Code from "../components/Code";
+import { BackArrow } from "./Svg";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -50,11 +52,21 @@ const CodeButton = styled(motion.div)`
 function Layout() {
   const [isClicked, setIsClicked] = useState(false);
   const [code, setCode] = useState(false);
+  const navigate = useNavigate();
+
   const onClick = () => {
     setIsClicked((prev) => !prev);
   };
   return (
     <Wrapper onClick={onClick}>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`layout`} /> : null}
       </AnimatePresence>

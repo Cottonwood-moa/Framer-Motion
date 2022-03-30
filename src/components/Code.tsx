@@ -36,7 +36,7 @@ const Close = styled.div`
   z-index: 1;
   cursor: pointer;
 `;
-interface IProps {
+export interface IProps {
   setCode(arg: boolean | ((prev: boolean) => void)): void;
   branch: string;
 }

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Code from "../components/Code";
+import { useNavigate } from "react-router-dom";
+import { BackArrow } from "./Svg";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -19,7 +21,7 @@ const ButtonWrap = styled.div`
 `;
 const Box = styled(motion.div)`
   position: absolute;
-  width: 200px;
+  width: 300px;
   height: 200px;
   border-radius: 15px;
   background-color: white;
@@ -74,9 +76,10 @@ const boxVariants = {
   }),
 };
 function Slider() {
-  const [visible, setVisible] = useState(2);
+  const [visible, setVisible] = useState(1);
   const [back, setBack] = useState(false);
   const [code, setCode] = useState(false);
+  const navigate = useNavigate();
   const nextButton = () => {
     setBack(false);
     setVisible((prev) => (prev === 10 ? (prev = 1) : prev + 1));
@@ -88,6 +91,14 @@ function Slider() {
   return (
     <>
       <Wrapper>
+        <BackArrow
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </BackArrow>
         <AnimatePresence>
           {code ? <Code setCode={setCode} branch={`slider`} /> : null}
         </AnimatePresence>

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import Code from "../components/Code";
+import { BackArrow } from "./Svg";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -74,8 +76,17 @@ function AnimatePresense() {
   const [isToggled, setIsToggled] = useState(false);
   const [code, setCode] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   return (
     <Wrapper ref={wrapRef}>
+      <BackArrow
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </BackArrow>
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`animatePresence`} /> : null}
       </AnimatePresence>

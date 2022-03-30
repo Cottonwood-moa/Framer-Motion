@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useWindowDimensions from "../getWindowDimension";
 const Container = styled(motion.div)`
   width: 1400px;
+  height: 100vh;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -46,7 +47,7 @@ const Circle = styled(motion.div)`
   height: 4rem;
   background-color: white;
   border-radius: 50%;
-  margin: 2rem;
+  margin: 4rem;
 `;
 const containerVars = {
   start: {},
@@ -126,7 +127,6 @@ function Home() {
           );
         })}
       </Container>
-      ;
     </>
   );
 }

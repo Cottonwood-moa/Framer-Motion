@@ -1,3 +1,4 @@
+```js
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
@@ -43,7 +44,7 @@ const boxVariants = {
 };
 
 function Gesture() {
-  const biggerBoxRef = useRef<HTMLDivElement>(null);
+  const biggerBoxRef = useRef < HTMLDivElement > null;
   const [code, setCode] = useState(false);
   return (
     <Wrapper>
@@ -68,3 +69,4 @@ function Gesture() {
 }
 
 export default Gesture;
+```

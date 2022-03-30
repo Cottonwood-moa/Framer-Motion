@@ -18,7 +18,7 @@ function Router() {
         <Route path="/variants" element={<Variants />} />
         <Route path="/motionValue" element={<MotionValue />} />
         <Route path="/layout" element={<Layout />} />
-        <Route path="/animatePresense" element={<AnimatePresense />} />
+        <Route path="/animatePresence" element={<AnimatePresense />} />
         <Route path="/selectBox" element={<SelectBox />} />
         <Route path="/slider" element={<Slider />} />
       </Routes>

@@ -83,7 +83,7 @@ const cardList: Array<ICard> = [
     backgroundColor: "#e84118",
   },
   {
-    content: "animatePresense",
+    content: "animatePresence",
     backgroundColor: "#273c75",
   },
   {

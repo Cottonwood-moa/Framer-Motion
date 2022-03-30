@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+import Code from "../components/Code";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -40,6 +41,19 @@ const Toggle = styled.div`
   align-items: center;
   cursor: pointer;
 `;
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 const boxVariants = {
   start: {
     scale: 0,
@@ -58,9 +72,13 @@ const boxVariants = {
 };
 function AnimatePresense() {
   const [isToggled, setIsToggled] = useState(false);
+  const [code, setCode] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   return (
     <Wrapper ref={wrapRef}>
+      <AnimatePresence>
+        {code ? <Code setCode={setCode} branch={`animatePresence`} /> : null}
+      </AnimatePresence>
       <AnimatePresence>
         {isToggled ? (
           <Box
@@ -75,6 +93,25 @@ function AnimatePresense() {
         ) : null}
       </AnimatePresence>
       <Toggle onClick={() => setIsToggled((prev) => !prev)}>버튼</Toggle>
+      <AnimatePresence>
+        {!code ? (
+          <CodeButton
+            initial={{
+              y: `5rem`,
+            }}
+            animate={{
+              y: `2rem`,
+              transition: {
+                delay: 0.5,
+              },
+            }}
+            exit={{
+              y: `5rem`,
+            }}
+            onClick={() => setCode(true)}
+          ></CodeButton>
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 }

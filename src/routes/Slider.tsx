@@ -13,7 +13,7 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   div {
     display: flex;
-    transform: translateY(200px);
+    transform: translateY(100px);
   }
 `;
 
@@ -29,6 +29,19 @@ const Box = styled(motion.div)`
   align-items: center;
   font-weight: bold;
   font-size: 28px;
+`;
+const Button = styled.div`
+  width: 4rem;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
 `;
 const boxVariants = {
   start: (back: boolean) => ({
@@ -74,8 +87,8 @@ function Slider() {
         </Box>
       </AnimatePresence>
       <div>
-        <button onClick={prevButton}>prev</button>
-        <button onClick={nextButton}>next</button>
+        <Button onClick={prevButton}>prev</Button>
+        <Button onClick={nextButton}>next</Button>
       </div>
     </Wrapper>
   );

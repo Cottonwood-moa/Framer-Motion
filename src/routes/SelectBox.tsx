@@ -35,6 +35,7 @@ const Box = styled(motion.div)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  cursor: pointer;
 `;
 const Overlay = styled(motion.div)`
   width: 100%;

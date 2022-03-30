@@ -28,7 +28,6 @@ const Box = styled(motion.div)`
   align-items: center;
   font-weight: bold;
 `;
-const boxVariants = {};
 
 function MotionValue() {
   // MotionValue는 react render cycle을 발생시키지 않는다. -> console로 x를 찍어도 바뀐값이 찍히지 않음
@@ -48,7 +47,7 @@ function MotionValue() {
     ]
   );
   const { scrollYProgress } = useViewportScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 3]);
   // 추적 방법
   useEffect(() => {
     x.onChange(() => {

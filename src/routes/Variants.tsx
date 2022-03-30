@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import Code from "../components/Code";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -26,6 +28,19 @@ const Circle = styled(motion.div)`
   background-color: white;
   place-self: center;
 `;
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 const boxVariants = {
   start: {
     opacity: 0,
@@ -43,14 +58,37 @@ const circleVariants = {
   end: { opacity: 1, y: 0 },
 };
 function Variants() {
+  const [code, setCode] = useState(false);
   return (
     <Wrapper>
+      <AnimatePresence>
+        {code ? <Code setCode={setCode} branch={`variants`} /> : null}
+      </AnimatePresence>
       <Box variants={boxVariants} initial={`start`} animate={`end`}>
         <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
         <Circle variants={circleVariants} />
       </Box>
+      <AnimatePresence>
+        {!code ? (
+          <CodeButton
+            initial={{
+              y: `5rem`,
+            }}
+            animate={{
+              y: `2rem`,
+              transition: {
+                delay: 0.5,
+              },
+            }}
+            exit={{
+              y: `5rem`,
+            }}
+            onClick={() => setCode(true)}
+          ></CodeButton>
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 }

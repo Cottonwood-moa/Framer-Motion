@@ -1,17 +1,19 @@
 import { motion, useViewportScroll } from "framer-motion";
 import styled from "styled-components";
-import { AnimatePresence } from "framer-motion";
+import { LayoutGroup } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useWindowDimensions from "../getWindowDimension";
 const Container = styled(motion.div)`
+  width: 1400px;
   left: 0;
   right: 0;
   margin: 0 auto;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 `;
-
+// const Card = styled(motion.div)<{ width: string }>` => with components props
 const Card = styled(motion.div)`
   width: 20rem;
   height: 20rem;
@@ -45,17 +47,10 @@ const cardList: Array<string> = [
 ];
 function Home() {
   const { width } = useWindowDimensions();
-  const [test, setTest] = useState(false);
-  console.log(width > 1200);
   return (
     <>
-      <H1 onClick={() => setTest((prev) => !prev)}>Framer motion</H1>
-      <Container
-        variants={containerVars}
-        style={{
-          gridTemplateColumns: width < 1200 ? `repeat(3,1fr)` : `repeat(4,1fr)`,
-        }}
-      >
+      <H1>Framer motion</H1>
+      <Container layout variants={containerVars}>
         {cardList.map((card, index) => {
           return (
             <Card layout key={index}>

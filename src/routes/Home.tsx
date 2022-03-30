@@ -112,10 +112,9 @@ function Home() {
       <Container layout variants={containerVars}>
         {cardList.map((card, index) => {
           return (
-            <Link to={`/${card.content}`}>
+            <Link to={`/${card.content}`} key={card.content}>
               <Card
                 layout
-                key={index}
                 variants={cardVars}
                 background={card.backgroundColor}
                 animate={{ rotate: 10 }}

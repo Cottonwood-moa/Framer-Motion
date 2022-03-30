@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Code from "../components/Code";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -43,15 +44,32 @@ const Overlay = styled(motion.div)`
   justify-content: center;
   align-items: center;
 `;
+
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
 interface IBoxContent {
   id: number;
   name: string;
 }
 function SelectBox() {
   const [id, setId] = useState<null | string>(null);
-
+  const [code, setCode] = useState(false);
   return (
     <Wrapper>
+      <AnimatePresence>
+        {code ? <Code setCode={setCode} branch={`selectBox`} /> : null}
+      </AnimatePresence>
       <Grid>
         {["1", "2", "3", "4"].map((n) => {
           return (
@@ -73,6 +91,25 @@ function SelectBox() {
               {id}
             </Box>
           </Overlay>
+        ) : null}
+      </AnimatePresence>
+      <AnimatePresence>
+        {!code ? (
+          <CodeButton
+            initial={{
+              y: `5rem`,
+            }}
+            animate={{
+              y: `2rem`,
+              transition: {
+                delay: 0.5,
+              },
+            }}
+            exit={{
+              y: `5rem`,
+            }}
+            onClick={() => setCode(true)}
+          ></CodeButton>
         ) : null}
       </AnimatePresence>
     </Wrapper>

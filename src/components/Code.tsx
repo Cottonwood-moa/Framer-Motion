@@ -19,6 +19,22 @@ const Overlay = styled(motion.div)`
     font-size: 56px;
   }
 `;
+const Close = styled.div`
+  position: fixed;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: 2rem;
+  right: 10px;
+  z-index: 1;
+  cursor: pointer;
+`;
 interface IProps {
   setCode(arg: boolean | ((prev: boolean) => void)): void;
   branch: string;
@@ -33,41 +49,43 @@ function Code({ setCode, branch }: IProps) {
   };
   useEffect(() => {
     read();
-    console.log(mdFile);
   }, [mdFile]);
   return (
-    <Overlay
-      initial={{ y: `100vh` }}
-      animate={{ y: `0` }}
-      exit={{ y: `100vh` }}
-      transition={{
-        duration: 0.4,
-      }}
-    >
-      <ReactMarkdown
-        children={mdFile}
-        remarkPlugins={[remarkGfm]}
-        components={{
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              <SyntaxHighlighter
-                children={String(children).replace(/\n$/, "")}
-                style={a11yDark}
-                language={match[1]}
-                PreTag="div"
-                {...props}
-              />
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            );
-          },
+    <>
+      <Overlay
+        initial={{ y: `100vh` }}
+        animate={{ y: `0` }}
+        exit={{ y: `100vh` }}
+        transition={{
+          duration: 0.4,
         }}
-      />
-      <button onClick={() => setCode((prev) => !prev)}>버튼</button>
-    </Overlay>
+      >
+        <Close onClick={() => setCode((prev) => !prev)}>X</Close>
+
+        <ReactMarkdown
+          children={mdFile}
+          remarkPlugins={[remarkGfm]}
+          components={{
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || "");
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  children={String(children).replace(/\n$/, "")}
+                  style={a11yDark}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                />
+              ) : (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        />
+      </Overlay>
+    </>
   );
 }
 

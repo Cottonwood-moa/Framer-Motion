@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import Code from "../components/Code";
 
+//  styled components
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
@@ -31,6 +32,20 @@ const Box = styled(motion.div)`
   align-items: center;
   font-weight: bold;
 `;
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+// Variants
 const boxVariants = {
   hover: { scale: 1.5, rotateZ: 90 },
   click: { scale: 1, borderRadius: "100px" },
@@ -41,6 +56,8 @@ const boxVariants = {
     },
   },
 };
+
+// DOM
 
 function Gesture() {
   const biggerBoxRef = useRef<HTMLDivElement>(null);
@@ -63,7 +80,25 @@ function Gesture() {
             whileDrag="drag"
           ></Box>
         </BiggerBox>
-        <button onClick={() => setCode(true)}>버튼</button>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
       </Wrapper>
     </>
   );

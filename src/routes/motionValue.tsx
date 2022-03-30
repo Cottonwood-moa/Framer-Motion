@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useTransform,
   useViewportScroll,
 } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Code from "../components/Code";
 
 const Wrapper = styled(motion.div)`
   height: 200vh;
@@ -29,7 +31,22 @@ const Box = styled(motion.div)`
   font-weight: bold;
 `;
 
+const CodeButton = styled(motion.div)`
+  position: fixed;
+  width: 15rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
 function MotionValue() {
+  const [code, setCode] = useState(false);
   // MotionValue는 react render cycle을 발생시키지 않는다. -> console로 x를 찍어도 바뀐값이 찍히지 않음
   const x = useMotionValue(0);
   // x값에 따라 지정한 값으로 변환
@@ -56,8 +73,30 @@ function MotionValue() {
   }, [x]);
   return (
     <Wrapper style={{ background: gradient }}>
+      <AnimatePresence>
+        {code ? <Code setCode={setCode} branch={`motionValue`} /> : null}
+      </AnimatePresence>
       {/* <button onClick={() => x.set(200)}>click me</button> */}
       <Box style={{ x, rotate, scale }} drag="x" dragSnapToOrigin></Box>
+      <AnimatePresence>
+        {!code ? (
+          <CodeButton
+            initial={{
+              y: `5rem`,
+            }}
+            animate={{
+              y: `2rem`,
+              transition: {
+                delay: 0.5,
+              },
+            }}
+            exit={{
+              y: `5rem`,
+            }}
+            onClick={() => setCode(true)}
+          ></CodeButton>
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 }

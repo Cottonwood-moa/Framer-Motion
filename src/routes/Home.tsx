@@ -55,6 +55,18 @@ const Circle = styled(motion.div)`
   border-radius: 50%;
   margin: 4rem;
 `;
+const Package = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.3) !important ;
+  padding: 1rem;
+  div {
+    margin-top: 2rem !important;
+    background-color: rgba(0, 0, 0, 0.5) !important ;
+  }
+`;
 const containerVars = {
   start: {},
   end: {},
@@ -141,6 +153,9 @@ function Home() {
             </Card>
           );
         })}
+      </Container>
+      <Package>
+        <H1>Package</H1>
         <ReactMarkdown
           children={mdFile}
           remarkPlugins={[remarkGfm]}
@@ -163,7 +178,7 @@ function Home() {
             },
           }}
         />
-      </Container>
+      </Package>
     </>
   );
 }

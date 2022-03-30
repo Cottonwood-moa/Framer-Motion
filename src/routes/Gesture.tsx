@@ -46,24 +46,26 @@ function Gesture() {
   const biggerBoxRef = useRef<HTMLDivElement>(null);
   const [code, setCode] = useState(false);
   return (
-    <Wrapper>
-      <BiggerBox ref={biggerBoxRef}>
-        <Box
-          variants={boxVariants}
-          drag
-          dragConstraints={biggerBoxRef} // drag가능한 범위 요소 지정
-          dragSnapToOrigin // drag후 원래 있던 자리로
-          dragElastic={0.0001} // 당기는 힘. 0~1사이 값, default:0.5
-          whileHover="hover"
-          whileTap="click"
-          whileDrag="drag"
-        ></Box>
-      </BiggerBox>
-      <button onClick={() => setCode(true)}>버튼</button>
+    <>
       <AnimatePresence>
-        {code ? <Code setCode={setCode} /> : null}
+        {code ? <Code setCode={setCode} branch={`gesture`} /> : null}
       </AnimatePresence>
-    </Wrapper>
+      <Wrapper>
+        <BiggerBox ref={biggerBoxRef}>
+          <Box
+            variants={boxVariants}
+            drag
+            dragConstraints={biggerBoxRef} // drag가능한 범위 요소 지정
+            dragSnapToOrigin // drag후 원래 있던 자리로
+            dragElastic={0.0001} // 당기는 힘. 0~1사이 값, default:0.5
+            whileHover="hover"
+            whileTap="click"
+            whileDrag="drag"
+          ></Box>
+        </BiggerBox>
+        <button onClick={() => setCode(true)}>버튼</button>
+      </Wrapper>
+    </>
   );
 }
 

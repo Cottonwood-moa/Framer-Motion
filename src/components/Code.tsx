@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -11,6 +10,7 @@ const Overlay = styled(motion.div)`
   position: absolute;
   width: 100vw;
   height: 100vh;
+  overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -21,13 +21,14 @@ const Overlay = styled(motion.div)`
 `;
 interface IProps {
   setCode(arg: boolean | ((prev: boolean) => void)): void;
+  branch: string;
 }
 const readMd = new ReadMd();
 
-function Code({ setCode }: IProps) {
+function Code({ setCode, branch }: IProps) {
   const [mdFile, setMdFile] = useState(``);
   const read = async () => {
-    const res = await readMd.readGithubMd(`Framer-Motion`);
+    const res = await readMd.readGithubMd(branch);
     setMdFile(res as string);
   };
   useEffect(() => {

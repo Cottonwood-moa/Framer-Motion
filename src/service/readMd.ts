@@ -2,14 +2,14 @@ interface IOption {
   [key: string]: string;
 }
 class ReadMd {
-  async readGithubMd(repository: string) {
+  async readGithubMd(branch: string) {
     const requestOptions: IOption = {
       method: "GET",
       redirect: "follow",
     };
 
     const res = fetch(
-      `https://raw.githubusercontent.com/Cottonwood-moa/${repository}/master/README.md`,
+      `https://raw.githubusercontent.com/Cottonwood-moa/Framer-Motion/${branch}/code.md`,
       requestOptions
     )
       .then((response) => response.text())

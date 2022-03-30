@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import ReadMd from "../service/readMd";
 import { useEffect, useState } from "react";
 const Overlay = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
@@ -15,6 +15,7 @@ const Overlay = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 10;
   h1 {
     font-size: 56px;
   }
@@ -53,9 +54,9 @@ function Code({ setCode, branch }: IProps) {
   return (
     <>
       <Overlay
-        initial={{ y: `100vh` }}
-        animate={{ y: `0` }}
-        exit={{ y: `100vh` }}
+        initial={{ top: `100vh` }}
+        animate={{ top: `0` }}
+        exit={{ top: `100vh` }}
         transition={{
           duration: 0.4,
         }}

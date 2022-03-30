@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Code from "../components/Code";
 
 const Wrapper = styled(motion.div)`
-  height: 200vh;
+  height: 150vh;
   width: 100vw;
   background: linear-gradient(135deg, rgb(238, 0, 153), rgb(221, 0, 238));
   color: #333;

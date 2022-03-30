@@ -1,8 +1,6 @@
-import { motion, useViewportScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "styled-components";
-import { LayoutGroup } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import useWindowDimensions from "../getWindowDimension";
 const Container = styled(motion.div)`
   width: 1400px;
@@ -14,15 +12,23 @@ const Container = styled(motion.div)`
   gap: 2rem;
 `;
 // const Card = styled(motion.div)<{ width: string }>` => with components props
-const Card = styled(motion.div)`
+const Card = styled(motion.div)<{ background: string }>`
   width: 20rem;
   height: 20rem;
   border-radius: 20px;
-  background-color: white;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
   place-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.background},
+    rgba(0, 0, 0, 0.5)
+  );
 `;
 const H1 = styled(motion.h1)`
   font-size: 48px;
@@ -35,15 +41,43 @@ const containerVars = {
   start: {},
   end: {},
 };
-const cardList: Array<string> = [
-  "gesture",
-  "variants",
-  "motionValue",
-  "layout",
-  "animatePresense",
-  "svg",
-  "selectBox",
-  "slider",
+interface ICard {
+  content: string;
+  backgroundColor: string;
+}
+const cardList: Array<ICard> = [
+  {
+    content: "gesture",
+    backgroundColor: "#00a8ff",
+  },
+  {
+    content: "variants",
+    backgroundColor: "#fbc531",
+  },
+  {
+    content: "motionValue",
+    backgroundColor: "#44bd32",
+  },
+  {
+    content: "layout",
+    backgroundColor: "#e84118",
+  },
+  {
+    content: "animatePresense",
+    backgroundColor: "#273c75",
+  },
+  {
+    content: "svg",
+    backgroundColor: "#8c7ae6",
+  },
+  {
+    content: "selectBox",
+    backgroundColor: "#40739e",
+  },
+  {
+    content: "slider",
+    backgroundColor: "#55efc4",
+  },
 ];
 function Home() {
   const { width } = useWindowDimensions();
@@ -53,8 +87,8 @@ function Home() {
       <Container layout variants={containerVars}>
         {cardList.map((card, index) => {
           return (
-            <Card layout key={index}>
-              {card} {index}
+            <Card layout key={index} background={card.backgroundColor}>
+              {card.content}
             </Card>
           );
         })}

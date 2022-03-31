@@ -4,6 +4,7 @@ import Gesture from "./routes/Gesture";
 import Home from "./routes/Home";
 import Layout from "./routes/Layout";
 import MotionValue from "./routes/motionValue";
+import NotFound from "./routes/NotFound";
 import SelectBox from "./routes/SelectBox";
 import Slider from "./routes/Slider";
 import Svg from "./routes/Svg";
@@ -21,6 +22,7 @@ function Router() {
         <Route path="/animatePresence" element={<AnimatePresense />} />
         <Route path="/selectBox" element={<SelectBox />} />
         <Route path="/slider" element={<Slider />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

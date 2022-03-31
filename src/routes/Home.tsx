@@ -40,6 +40,7 @@ const Card = styled(motion.div)<{ background: string }>`
     ${(props) => props.background},
     rgba(255, 255, 255, 0.4)
   );
+  box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.3);
 `;
 const H1 = styled(motion.p)`
   font-size: 48px;

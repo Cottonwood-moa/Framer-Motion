@@ -4,6 +4,7 @@
 
 다양한 Framer Motion 예제입니다.  
 [Try it yourself!](https://framer-motion-example.netlify.app/)
+[Github](https://github.com/Cottonwood-moa/Framer-Motion)
 
 ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/79053495/160540988-85debf56-942f-4d9c-ad9c-fd65e977afb8.gif)  
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/79053495/160540996-0b2ade47-b13d-44c2-94b7-61ce8c7c6fb0.gif)  

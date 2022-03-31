@@ -1,6 +1,6 @@
 ```json
 {
-  "name": "for-blog",
+  "name": "Framer-Motion",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

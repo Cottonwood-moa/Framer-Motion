@@ -56,7 +56,7 @@ table {
 }
 body{
   font-family: 'Source Sans Pro', sans-serif;
-  background:linear-gradient(135deg,#e09,#d0e);
+  background:linear-gradient(135deg,#e09,rgba(221, 0, 238 , 0.6));
   overflow-x: hidden;
   font-family: 'Shadows Into Light', cursive;
 }

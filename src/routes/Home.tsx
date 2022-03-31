@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import useWindowDimensions from "../getWindowDimension";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -9,12 +10,14 @@ import { useEffect, useState } from "react";
 import ReadMd from "../service/readMd";
 import MoreInfo from "../components/MoreInfo";
 const Container = styled(motion.div)`
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
   min-height: 120vh;
   left: 0;
   right: 0;
   margin: 0 auto;
   padding-top: 15rem;
+  padding-bottom: 10rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -61,8 +64,19 @@ const Package = styled.div`
   }
 `;
 const containerVars = {
-  start: {},
-  end: {},
+  start: {
+    gridTemplateColumns: `repeat(4,1fr)`,
+  },
+  end: (width: number) => ({
+    gridTemplateColumns:
+      width < 1500
+        ? width < 1000
+          ? width < 800
+            ? `repeat(1,1fr)`
+            : `repeat(2,1fr)`
+          : `repeat(3,1fr)`
+        : `repeat(4,1fr)`,
+  }),
 };
 const cardVars = {
   whileHover: {
@@ -112,6 +126,7 @@ const cardList: Array<ICard> = [
 ];
 const readMd = new ReadMd();
 function Home() {
+  const { width } = useWindowDimensions();
   const navigate = useNavigate();
   const [mdFile, setMdFile] = useState(``);
   const read = async () => {
@@ -125,7 +140,13 @@ function Home() {
     <>
       <MoreInfo />
 
-      <Container layout variants={containerVars}>
+      <Container
+        layout
+        variants={containerVars}
+        initial={`start`}
+        animate={`end`}
+        custom={width}
+      >
         {cardList.map((card, index) => {
           return (
             <Card

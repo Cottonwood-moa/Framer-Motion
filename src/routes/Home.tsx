@@ -20,8 +20,8 @@ const Container = styled(motion.div)`
   padding-bottom: 10rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: url("/palette.svg") no-repeat center center;
-  background-size: 50%;
+  background: url("/palette.svg") no-repeat center center fixed;
+  background-size: 40%;
   gap: 2rem;
 `;
 // const Card = styled(motion.div)<{ width: string }>` => with components props

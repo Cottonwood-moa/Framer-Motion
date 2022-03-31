@@ -80,7 +80,7 @@ const containerVars = {
 };
 const cardVars = {
   whileHover: {
-    rotate: 0,
+    rotate: 360,
     transition: {
       duration: 0.2,
     },
@@ -153,7 +153,8 @@ function Home() {
               layout
               variants={cardVars}
               background={card.backgroundColor}
-              animate={{ rotate: 10 }}
+              initial={{ rotate: 270, scale: 0 }}
+              animate={{ rotate: 370, scale: 1 }}
               whileHover={`whileHover`}
               onClick={() => navigate(`${card.content}`, {})}
               key={card.content}

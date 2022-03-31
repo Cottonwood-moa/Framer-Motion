@@ -10,9 +10,9 @@ const Wrap = styled(motion.div)`
 const Circle = styled(motion.div)<{ url: string }>`
   width: 4rem;
   height: 4rem;
-  background-color: white;
   background: url(${(props) => props.url}) no-repeat center center;
-  background-size: 100% 100%;
+  background-size: 105% 105%;
+  background-color: white;
   border-radius: 50%;
   margin: 1rem;
   cursor: pointer;
@@ -54,7 +54,7 @@ function MoreInfo() {
                   "https://github.com/Cottonwood-moa/Framer-Motion")
               }
               layoutId="github"
-              url={`https://avatars.githubusercontent.com/u/79053495?v=4`}
+              url={`https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png`}
             ></Circle>
             <Circle
               onClick={() =>
@@ -95,7 +95,7 @@ function MoreInfo() {
                 (window.location.href =
                   "https://github.com/Cottonwood-moa/Framer-Motion")
               }
-              url={`https://avatars.githubusercontent.com/u/79053495?v=4`}
+              url={`https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png`}
               layoutId="github"
               style={{ scale: 0.8, margin: `0.4rem` }}
             />

@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import Code from "../components/Code";
 import { useNavigate } from "react-router-dom";
 import { BackArrow } from "./Svg";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 const Wrapper = styled(motion.div)`
   height: 150vh;
@@ -31,20 +33,6 @@ const Box = styled(motion.div)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-`;
-
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 `;
 
 function MotionValue() {
@@ -75,40 +63,43 @@ function MotionValue() {
     });
   }, [x]);
   return (
-    <Wrapper style={{ background: gradient }}>
-      <BackArrow
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </BackArrow>
-      <AnimatePresence>
-        {code ? <Code setCode={setCode} branch={`motionValue`} /> : null}
-      </AnimatePresence>
-      {/* <button onClick={() => x.set(200)}>click me</button> */}
-      <Box style={{ x, rotate, scale }} drag="x" dragSnapToOrigin></Box>
-      <AnimatePresence>
-        {!code ? (
-          <CodeButton
-            initial={{
-              y: `5rem`,
-            }}
-            animate={{
-              y: `2rem`,
-              transition: {
-                delay: 0.5,
-              },
-            }}
-            exit={{
-              y: `5rem`,
-            }}
-            onClick={() => setCode(true)}
-          ></CodeButton>
-        ) : null}
-      </AnimatePresence>
-    </Wrapper>
+    <>
+      <MoreInfo />
+      <Wrapper style={{ background: gradient }}>
+        <BackArrow
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </BackArrow>
+        <AnimatePresence>
+          {code ? <Code setCode={setCode} branch={`motionValue`} /> : null}
+        </AnimatePresence>
+        {/* <button onClick={() => x.set(200)}>click me</button> */}
+        <Box style={{ x, rotate, scale }} drag="x" dragSnapToOrigin></Box>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
+      </Wrapper>
+    </>
   );
 }
 

@@ -4,6 +4,8 @@ import { useState } from "react";
 import Code from "../components/Code";
 import { useNavigate } from "react-router-dom";
 import { BackArrow } from "./Svg";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -48,83 +50,69 @@ const Overlay = styled(motion.div)`
   align-items: center;
 `;
 
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
-interface IBoxContent {
-  id: number;
-  name: string;
-}
 function SelectBox() {
   const [id, setId] = useState<null | string>(null);
   const [code, setCode] = useState(false);
   const navigate = useNavigate();
   return (
-    <Wrapper>
-      <BackArrow
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </BackArrow>
-      <AnimatePresence>
-        {code ? <Code setCode={setCode} branch={`selectBox`} /> : null}
-      </AnimatePresence>
-      <Grid>
-        {["1", "2", "3", "4"].map((n) => {
-          return (
-            <Box onClick={() => setId(n)} key={n} layoutId={n + ""}>
-              {n}
-            </Box>
-          );
-        })}
-      </Grid>
-      <AnimatePresence>
-        {id ? (
-          <Overlay
-            onClick={() => setId((prev) => null)}
-            initial={{ backgroundColor: `rgba(0, 0, 0, 0)` }}
-            animate={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
-            exit={{ backgroundColor: `rgba(0, 0, 0, 0)` }}
-          >
-            <Box layoutId={id} style={{ width: 400, height: 200 }}>
-              {id}
-            </Box>
-          </Overlay>
-        ) : null}
-      </AnimatePresence>
-      <AnimatePresence>
-        {!code ? (
-          <CodeButton
-            initial={{
-              y: `5rem`,
-            }}
-            animate={{
-              y: `2rem`,
-              transition: {
-                delay: 0.5,
-              },
-            }}
-            exit={{
-              y: `5rem`,
-            }}
-            onClick={() => setCode(true)}
-          ></CodeButton>
-        ) : null}
-      </AnimatePresence>
-    </Wrapper>
+    <>
+      <MoreInfo />
+      <Wrapper>
+        <BackArrow
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </BackArrow>
+        <AnimatePresence>
+          {code ? <Code setCode={setCode} branch={`selectBox`} /> : null}
+        </AnimatePresence>
+        <Grid>
+          {["1", "2", "3", "4"].map((n) => {
+            return (
+              <Box onClick={() => setId(n)} key={n} layoutId={n + ""}>
+                {n}
+              </Box>
+            );
+          })}
+        </Grid>
+        <AnimatePresence>
+          {id ? (
+            <Overlay
+              onClick={() => setId((prev) => null)}
+              initial={{ backgroundColor: `rgba(0, 0, 0, 0)` }}
+              animate={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
+              exit={{ backgroundColor: `rgba(0, 0, 0, 0)` }}
+            >
+              <Box layoutId={id} style={{ width: 400, height: 200 }}>
+                {id}
+              </Box>
+            </Overlay>
+          ) : null}
+        </AnimatePresence>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
+      </Wrapper>
+    </>
   );
 }
 

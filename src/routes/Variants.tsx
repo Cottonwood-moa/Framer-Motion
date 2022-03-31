@@ -4,6 +4,8 @@ import { useState } from "react";
 import Code from "../components/Code";
 import { useNavigate } from "react-router-dom";
 import { BackArrow } from "./Svg";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -30,19 +32,7 @@ const Circle = styled(motion.div)`
   background-color: white;
   place-self: center;
 `;
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+
 const boxVariants = {
   start: {
     opacity: 0,
@@ -63,44 +53,47 @@ function Variants() {
   const [code, setCode] = useState(false);
   const navigate = useNavigate();
   return (
-    <Wrapper>
-      <BackArrow
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </BackArrow>
-      <AnimatePresence>
-        {code ? <Code setCode={setCode} branch={`variants`} /> : null}
-      </AnimatePresence>
-      <Box variants={boxVariants} initial={`start`} animate={`end`}>
-        <Circle variants={circleVariants} />
-        <Circle variants={circleVariants} />
-        <Circle variants={circleVariants} />
-        <Circle variants={circleVariants} />
-      </Box>
-      <AnimatePresence>
-        {!code ? (
-          <CodeButton
-            initial={{
-              y: `5rem`,
-            }}
-            animate={{
-              y: `2rem`,
-              transition: {
-                delay: 0.5,
-              },
-            }}
-            exit={{
-              y: `5rem`,
-            }}
-            onClick={() => setCode(true)}
-          ></CodeButton>
-        ) : null}
-      </AnimatePresence>
-    </Wrapper>
+    <>
+      <MoreInfo />
+      <Wrapper>
+        <BackArrow
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </BackArrow>
+        <AnimatePresence>
+          {code ? <Code setCode={setCode} branch={`variants`} /> : null}
+        </AnimatePresence>
+        <Box variants={boxVariants} initial={`start`} animate={`end`}>
+          <Circle variants={circleVariants} />
+          <Circle variants={circleVariants} />
+          <Circle variants={circleVariants} />
+          <Circle variants={circleVariants} />
+        </Box>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
+      </Wrapper>
+    </>
   );
 }
 

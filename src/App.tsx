@@ -3,6 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "./theme";
 import { createGlobalStyle } from "styled-components";
+import "./font.css";
+import { Helmet } from "react-helmet";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
  html, body, div, span, applet, object, iframe,
@@ -56,6 +58,7 @@ body{
   font-family: 'Source Sans Pro', sans-serif;
   background:linear-gradient(135deg,#e09,#d0e);
   overflow-x: hidden;
+  font-family: 'Shadows Into Light', cursive;
 }
 *{
   box-sizing: border-box;
@@ -85,9 +88,22 @@ a{
   background: #999;
 }
 `;
+
 function App() {
   return (
     <>
+      <Helmet>
+        <html lang="ko" />
+        <title>Framer Motion Example</title>
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Framer Motion Example" />
+        <meta property="og:title" content="Framer Motion Example" />
+        <meta
+          property="og:description"
+          content="Framer Motion 연습 참고 예제 사이트 입니다.
+            "
+        />
+      </Helmet>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Router />

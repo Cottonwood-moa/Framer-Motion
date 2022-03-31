@@ -8,12 +8,14 @@ import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { useEffect, useState } from "react";
 import ReadMd from "../service/readMd";
+import MoreInfo from "../components/MoreInfo";
 const Container = styled(motion.div)`
   width: 1400px;
-  height: 100vh;
+  min-height: 120vh;
   left: 0;
   right: 0;
   margin: 0 auto;
+  padding-top: 15rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -37,24 +39,16 @@ const Card = styled(motion.div)<{ background: string }>`
     rgba(255, 255, 255, 0.4)
   );
 `;
-const H1 = styled(motion.h1)`
+const H1 = styled(motion.p)`
   font-size: 48px;
   font-weight: bold;
   color: white;
-  text-align: center;
   margin: 4rem 0 0 0;
-`;
-const Wrap = styled(motion.div)`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
-const Circle = styled(motion.div)`
-  width: 4rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 50%;
-  margin: 4rem;
-`;
+
 const Package = styled.div`
   display: flex;
   justify-content: center;
@@ -119,7 +113,6 @@ const cardList: Array<ICard> = [
 ];
 const readMd = new ReadMd();
 function Home() {
-  const { width } = useWindowDimensions();
   const navigate = useNavigate();
   const [mdFile, setMdFile] = useState(``);
   const read = async () => {
@@ -131,12 +124,8 @@ function Home() {
   }, [mdFile]);
   return (
     <>
-      <H1>Framer motion</H1>
-      <Wrap>
-        <Circle />
-        <Circle />
-        <Circle />
-      </Wrap>
+      <MoreInfo />
+
       <Container layout variants={containerVars}>
         {cardList.map((card, index) => {
           return (
@@ -146,7 +135,7 @@ function Home() {
               background={card.backgroundColor}
               animate={{ rotate: 10 }}
               whileHover={`whileHover`}
-              onClick={() => navigate(`/${card.content}`)}
+              onClick={() => navigate(`${card.content}`, {})}
               key={card.content}
             >
               {card.content.toUpperCase()}

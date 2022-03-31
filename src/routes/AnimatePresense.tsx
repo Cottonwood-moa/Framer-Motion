@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Code from "../components/Code";
 import { BackArrow } from "./Svg";
 import { useNavigate } from "react-router-dom";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -43,19 +45,6 @@ const Toggle = styled.div`
   align-items: center;
   cursor: pointer;
 `;
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
 const boxVariants = {
   start: {
     scale: 0,
@@ -78,52 +67,55 @@ function AnimatePresense() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   return (
-    <Wrapper ref={wrapRef}>
-      <BackArrow
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </BackArrow>
-      <AnimatePresence>
-        {code ? <Code setCode={setCode} branch={`animatePresence`} /> : null}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isToggled ? (
-          <Box
-            drag
-            dragConstraints={wrapRef}
-            variants={boxVariants}
-            dragElastic={0.0001}
-            initial={`start`}
-            animate={`end`}
-            exit={`hide`}
-          />
-        ) : null}
-      </AnimatePresence>
-      <Toggle onClick={() => setIsToggled((prev) => !prev)}>버튼</Toggle>
-      <AnimatePresence>
-        {!code ? (
-          <CodeButton
-            initial={{
-              y: `5rem`,
-            }}
-            animate={{
-              y: `2rem`,
-              transition: {
-                delay: 0.5,
-              },
-            }}
-            exit={{
-              y: `5rem`,
-            }}
-            onClick={() => setCode(true)}
-          ></CodeButton>
-        ) : null}
-      </AnimatePresence>
-    </Wrapper>
+    <>
+      <MoreInfo />
+      <Wrapper ref={wrapRef}>
+        <BackArrow
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </BackArrow>
+        <AnimatePresence>
+          {code ? <Code setCode={setCode} branch={`animatePresence`} /> : null}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isToggled ? (
+            <Box
+              drag
+              dragConstraints={wrapRef}
+              variants={boxVariants}
+              dragElastic={0.0001}
+              initial={`start`}
+              animate={`end`}
+              exit={`hide`}
+            />
+          ) : null}
+        </AnimatePresence>
+        <Toggle onClick={() => setIsToggled((prev) => !prev)}>Toggle</Toggle>
+        <AnimatePresence>
+          {!code ? (
+            <CodeButton
+              initial={{
+                y: `5rem`,
+              }}
+              animate={{
+                y: `2rem`,
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+              exit={{
+                y: `5rem`,
+              }}
+              onClick={() => setCode(true)}
+            ></CodeButton>
+          ) : null}
+        </AnimatePresence>
+      </Wrapper>
+    </>
   );
 }
 

@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Code from "../components/Code";
 import { BackArrow } from "./Svg";
 import { useNavigate } from "react-router-dom";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 //  styled components
 const Wrapper = styled.div`
@@ -34,19 +36,7 @@ const Box = styled(motion.div)`
   align-items: center;
   font-weight: bold;
 `;
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+
 // Variants
 const boxVariants = {
   hover: { scale: 1.5, rotateZ: 90 },
@@ -67,6 +57,8 @@ function Gesture() {
   const navigate = useNavigate();
   return (
     <>
+      <MoreInfo />
+
       <AnimatePresence>
         {code ? <Code setCode={setCode} branch={`gesture`} /> : null}
       </AnimatePresence>

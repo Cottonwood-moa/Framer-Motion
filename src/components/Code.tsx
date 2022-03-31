@@ -50,6 +50,7 @@ function Code({ setCode, branch }: IProps) {
   };
   useEffect(() => {
     read();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mdFile]);
   return (
     <>

@@ -4,6 +4,8 @@ import { useState } from "react";
 import Code from "../components/Code";
 import { useNavigate } from "react-router-dom";
 import { BackArrow } from "./Svg";
+import MoreInfo from "../components/MoreInfo";
+import { CodeButton } from "../components/commonstyle";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -45,19 +47,7 @@ const Button = styled.div`
   margin: 2rem;
   cursor: pointer;
 `;
-const CodeButton = styled(motion.div)`
-  position: fixed;
-  width: 15rem;
-  height: 4rem;
-  background-color: white;
-  border-radius: 20px;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+
 const boxVariants = {
   start: (back: boolean) => ({
     x: back ? -500 : 500,
@@ -90,6 +80,7 @@ function Slider() {
   };
   return (
     <>
+      <MoreInfo />
       <Wrapper>
         <BackArrow
           initial={{ scale: 0 }}

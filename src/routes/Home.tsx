@@ -20,6 +20,8 @@ const Container = styled(motion.div)`
   padding-bottom: 10rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  background: url("/palette.svg") no-repeat center center;
+  background-size: 50%;
   gap: 2rem;
 `;
 // const Card = styled(motion.div)<{ width: string }>` => with components props
@@ -38,7 +40,7 @@ const Card = styled(motion.div)<{ background: string }>`
   background: linear-gradient(
     135deg,
     ${(props) => props.background},
-    rgba(255, 255, 255, 0.4)
+    rgba(200, 200, 200, 0.9)
   );
   box-shadow: 10px 10px 49px 0px rgba(0, 0, 0, 0.3);
 `;
